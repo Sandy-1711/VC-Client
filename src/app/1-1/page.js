@@ -1,4 +1,5 @@
 'use client';
+import { SpeakerLoudIcon, SpeakerOffIcon } from '@radix-ui/react-icons';
 import { useEffect, useRef, useState } from 'react';
 import io from 'socket.io-client';
 
@@ -8,6 +9,7 @@ export default function OneToOne() {
     const remoteVideoRef = useRef(null);
     const [localStream, setLocalStream] = useState(null);
     const [pc, setPc] = useState(null);
+    const [remoteMuted, setRemoteMuted] = useState(false);
     const start = async () => {
         try {
             let stream;
@@ -118,7 +120,7 @@ export default function OneToOne() {
                 <h2 className="text-2xl md:block hidden w-2/3 mb-5 font-bold font-sans text-center">
                     One to One Video Communication powered by WebRTC, completely secure and encrypted
                 </h2>
-                <div className='absolute md:relative gap-3 flex justify-center items-center bottom-10 md:bottom-0'>
+                <div className='absolute md:relative gap-3 flex justify-center items-center bottom-10 z-10 md:bottom-0'>
                     <button onClick={call} className="bg-blue-500 hover:bg-blue-700 transition-colors text-white px-3 py-1.5 rounded">
                         Call
                     </button>
@@ -127,8 +129,19 @@ export default function OneToOne() {
                     </button>
                 </div>
                 <div className="w-full md:h-max h-full flex gap-3 p-5 flex-col md:flex-row">
-                    <video ref={localVideoRef} className="w-full h-1/2 md:w-1/2 md:h-full rounded-lg bg-[#2c2c2c]" id="myStream" muted autoPlay playsInline></video>
-                    <video ref={remoteVideoRef} className="w-full h-1/2 md:w-1/2 md:h-full rounded-lg bg-[#2c2c2c]" id="peerPlayer" muted autoPlay playsInline></video>
+                    <div className="w-full h-1/2 md:w-1/2 md:h-full rounded-lg bg-[#2c2c2c]">
+                        <video muted className='h-full w-full' ref={localVideoRef} id="myStream" autoPlay playsInline></video>
+                    </div>
+                    <div className="w-full h-1/2 relative md:w-1/2 md:h-full rounded-lg bg-[#2c2c2c]">
+                        <video muted={remoteMuted} className='h-full w-full' ref={remoteVideoRef} id="peerPlayer" autoPlay playsInline></video>
+                        <div className='absolute bottom-5 right-5 text-white'>
+                            {remoteMuted ?
+                                <SpeakerOffIcon className='h-6 w-6 cursor-pointer' onClick={() => setRemoteMuted(false)} />
+                                :
+                                <SpeakerLoudIcon className='h-6 w-6 cursor-pointer' onClick={() => setRemoteMuted(true)} />
+                            }
+                        </div>
+                    </div>
                 </div>
             </div>
 
