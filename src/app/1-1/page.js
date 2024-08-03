@@ -35,7 +35,7 @@ export default function OneToOne() {
     useEffect(() => {
 
 
-        socketRef.current = io.connect('http://localhost:4000', {
+        socketRef.current = io.connect('https://vc-server-re2d.onrender.com/', {
             transports: ['websocket'],
             origin: '*'
         });
