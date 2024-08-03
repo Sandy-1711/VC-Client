@@ -129,11 +129,11 @@ export default function OneToOne() {
                     </button>
                 </div>
                 <div className="w-full md:h-max h-full flex gap-3 p-5 flex-col md:flex-row">
-                    <div className="w-full h-1/2 md:w-1/2 md:h-full rounded-lg bg-[#2c2c2c]">
-                        <video muted className='h-full w-full' ref={localVideoRef} id="myStream" autoPlay playsInline></video>
+                    <div className="w-full h-1/2 md:w-1/2 md:h-[500px] rounded-lg bg-[#2c2c2c] overflow-hidden">
+                        <video muted className='h-full w-full object-contain' ref={localVideoRef} id="myStream" autoPlay playsInline></video>
                     </div>
-                    <div className="w-full h-1/2 relative md:w-1/2 md:h-full rounded-lg bg-[#2c2c2c]">
-                        <video muted={remoteMuted} className='h-full w-full' ref={remoteVideoRef} id="peerPlayer" autoPlay playsInline></video>
+                    <div className="w-full h-1/2 relative md:w-1/2 md:h-[500px] rounded-lg bg-[#2c2c2c] overflow-hidden">
+                        <video muted={remoteMuted} className='h-full w-full object-contain' ref={remoteVideoRef} id="peerPlayer" autoPlay  playsInline></video>
                         <div className='absolute bottom-5 right-5 text-white'>
                             {remoteMuted ?
                                 <SpeakerOffIcon className='h-6 w-6 cursor-pointer' onClick={() => setRemoteMuted(false)} />
