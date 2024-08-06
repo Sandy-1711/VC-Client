@@ -29,7 +29,7 @@ export default function OneMany() {
     async function handleNegotiationNeededEvent(pc) {
         const offer = await pc.createOffer()
         pc.setLocalDescription(offer);
-        const res = await fetch('http://localhost:4000/api/v1/broadcast', {
+        const res = await fetch('https://vc-server-re2d.onrender.com/api/v1/broadcast', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

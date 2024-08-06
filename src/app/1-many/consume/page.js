@@ -29,7 +29,7 @@ export default function Consumer() {
     async function handleNegotiationNeededEvent(pc) {
         const offer = await pc.createOffer();
         await pc.setLocalDescription(offer);
-        const res = await fetch('http://localhost:4000/api/v1/consume', {
+        const res = await fetch('https://vc-server-re2d.onrender.com/api/v1/consume', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
